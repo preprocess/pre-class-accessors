@@ -2,7 +2,7 @@
     "name": "pre/class-accessors",
     "require": {
         "php": "^7.0",
-        "pre/plugin": "dev-master"
+        "pre/plugin": "^0.1"
     },
     "autoload": {
         "files": [
