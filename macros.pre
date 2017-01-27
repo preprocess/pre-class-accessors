@@ -55,3 +55,31 @@ macro ·unsafe {
         ···getter
     }
 }
+
+macro ·unsafe {
+    private T_VARIABLE·variable {
+        set {
+            ···setter
+        }
+    };
+} >> {
+    private T_VARIABLE·variable;
+
+    private function ··concat(__set_ ··unvar(T_VARIABLE·variable))($value) {
+        ···setter
+    }
+}
+
+macro ·unsafe {
+    private T_VARIABLE·variable {
+        get {
+            ···getter
+        }
+    };
+} >> {
+    private T_VARIABLE·variable;
+
+    private function ··concat(__get_ ··unvar(T_VARIABLE·variable))() {
+        ···getter
+    }
+}
