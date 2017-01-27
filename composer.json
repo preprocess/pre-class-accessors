@@ -1,0 +1,17 @@
+{
+    "name": "pre/class-accessors",
+    "require": {
+        "php": "^7.0",
+        "pre/plugin": "dev-master"
+    },
+    "autoload": {
+        "files": [
+            "functions.php"
+        ],
+        "psr-4": {
+            "Pre\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
