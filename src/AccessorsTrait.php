@@ -15,6 +15,8 @@ trait AccessorsTrait
         if (method_exists($this, "__get_{$property}")) {
             return $this->{"__get_{$property}"}();
         }
+
+        return parent::__get($property);
     }
 
     /**
@@ -28,5 +30,7 @@ trait AccessorsTrait
         if (method_exists($this, "__set_{$property}")) {
             return $this->{"__set_{$property}"}($value);
         }
+
+        return parent::__set($property, $value);
     }
 }
