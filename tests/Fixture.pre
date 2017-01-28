@@ -1,0 +1,25 @@
+<?php
+
+namespace Pre\Tests;
+
+class Fixture
+{
+    private $name {
+        get {
+            return $this->name;
+        }
+
+        set {
+            $this->name = ucwords($value);
+        }
+
+        unset {
+            $this->name = "unset";
+        }
+    };
+
+    public function __get_fallback($property)
+    {
+        return "fallback";
+    }
+}

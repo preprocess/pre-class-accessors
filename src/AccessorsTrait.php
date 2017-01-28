@@ -16,7 +16,7 @@ trait AccessorsTrait
             return $this->{"__get_{$property}"}();
         }
 
-        return parent::__get($property);
+        return $this->__get_fallback($property);
     }
 
     /**
@@ -31,6 +31,20 @@ trait AccessorsTrait
             return $this->{"__set_{$property}"}($value);
         }
 
-        return parent::__set($property, $value);
+        return $this->__set_fallback($property, $value);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param string $property
+     */
+    public function __unset($property)
+    {
+        if (method_exists($this, "__unset_{$property}")) {
+            return $this->{"__unset_{$property}"}();
+        }
+
+        return $this->__unset_fallback($property);
     }
 }
