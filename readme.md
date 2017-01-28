@@ -7,7 +7,7 @@ This adds class accessor macros, to allow C#-style getters, setters, and unsette
 The first step is to require this repository in your plugin repository:
 
 ```
-composer require pre/short-closures
+composer require pre/class-accessors
 ```
 
 Then, you can add getters, setters, and unsetters; using the following syntax:
