@@ -1,6 +1,6 @@
 <?php
 
-namespace Pre\Tests;
+namespace Pre\ClassAccessors;
 
 use PHPUnit\Framework\TestCase;
 
@@ -8,7 +8,7 @@ class MacroTest extends TestCase
 {
     public function testClassAccessors()
     {
-        $fixture = new Fixture();
+        $fixture = new Fixture\Fixture();
 
         $this->assertEmpty($fixture->name);
 
@@ -23,7 +23,7 @@ class MacroTest extends TestCase
 
     public function testFallback()
     {
-        $fixture = new Fixture();
+        $fixture = new Fixture\Fixture();
 
         $this->assertEquals("fallback", $fixture->foo);
     }

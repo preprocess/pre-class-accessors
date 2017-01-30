@@ -1,6 +1,6 @@
 <?php
 
-namespace Pre\Tests;
+namespace Pre\ClassAccessors\Fixture;
 
 class Fixture
 {
@@ -18,7 +18,7 @@ class Fixture
         }
     };
 
-    public function __get_fallback($property)
+    public function __class_accessor_get_fallback($property)
     {
         return "fallback";
     }
