@@ -1,11 +1,11 @@
 <?php
 
 macro {
-    ·ns()·class {
+    class ·ns()·class {
         ···body
     }
 } >> {
-    ·class {
+    class ·class {
         use \Pre\ClassAccessors\ClassAccessorsTrait;
 
         ···body
