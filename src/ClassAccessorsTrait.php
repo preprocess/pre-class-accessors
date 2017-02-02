@@ -12,20 +12,32 @@ trait ClassAccessorsTrait
      */
     public function __get($property)
     {
-        return $this->__class_accessor_get($property);
+        return $this->handleGetClassAccessors($property);
     }
 
     /**
+     * Finds and invokes getters.
+     *
      * @param string $property
      * @param mixed $value
      */
-    protected function __class_accessor_get($property)
+    protected function handleGetClassAccessors($property)
     {
-        if (method_exists($this, "__class_accessor_get_{$property}")) {
-            return $this->{"__class_accessor_get_{$property}"}();
-        }
+        $property = $this->studly($property);
 
-        return $this->__class_accessor_get_fallback($property);
+        if (method_exists($this, "get{$property}")) {
+            return $this->{"get{$property}"}();
+        }
+    }
+
+    /**
+     * Replaces "this_format" and "this-format" with "ThisFormat".
+     *
+     * @return string
+     */
+    private function studly($string)
+    {
+        return str_replace(" ", "", ucwords(str_replace(["-", "_"], " ", $string)));
     }
 
     /**
@@ -36,20 +48,22 @@ trait ClassAccessorsTrait
      */
     public function __set($property, $value)
     {
-        return $this->__class_accessor_set($property, $value);
+        return $this->handleSetClassAccessors($property, $value);
     }
 
     /**
+     * Finds and invokes setters.
+     *
      * @param string $property
      * @param mixed $value
      */
-    protected function __class_accessor_set($property, $value)
+    protected function handleSetClassAccessors($property, $value)
     {
-        if (method_exists($this, "__class_accessor_set_{$property}")) {
-            return $this->{"__class_accessor_set_{$property}"}($value);
-        }
+        $property = $this->studly($property);
 
-        return $this->__class_accessor_set_fallback($property, $value);
+        if (method_exists($this, "set{$property}")) {
+            return $this->{"set{$property}"}($value);
+        }
     }
 
     /**
@@ -59,18 +73,20 @@ trait ClassAccessorsTrait
      */
     public function __unset($property)
     {
-        return $this->__class_accessor_unset($property);
+        return $this->handleUnsetClassAccessors($property);
     }
 
     /**
+     * Finds and invokes unsetters.
+     *
      * @param string $property
      */
-    protected function __class_accessor_unset($property)
+    protected function handleUnsetClassAccessors($property)
     {
-        if (method_exists($this, "__class_accessor_unset_{$property}")) {
-            return $this->{"__class_accessor_unset_{$property}"}();
-        }
+        $property = $this->studly($property);
 
-        return $this->__class_accessor_unset_fallback($property);
+        if (method_exists($this, "unset{$property}")) {
+            return $this->{"unset{$property}"}();
+        }
     }
 }
