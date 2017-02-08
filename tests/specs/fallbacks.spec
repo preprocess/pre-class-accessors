@@ -65,7 +65,9 @@ class Fixture
 
     public function __get($property)
     {
-        $this->handleGetClassAccessors($property);
+        if ($result·2 = $this->handleGetClassAccessors($property)) {
+            return $result·2;
+        }
 
         print "getting {$property}";
     }
@@ -79,7 +81,9 @@ class Fixture
 
     public function __set($property, $value)
     {
-        $this->handleSetClassAccessors($property, $value);
+        if ($result·4 = $this->handleSetClassAccessors($property, $value)) {
+            return $result·4;
+        }
 
         print "setting {$property}";
     }
@@ -93,7 +97,9 @@ class Fixture
 
     public function __unset($property)
     {
-        $this->handleUnsetClassAccessors($property);
+        if ($result·6 = $this->handleUnsetClassAccessors($property)) {
+            return $result·6;
+        }
 
         print "unsetting {$property}";
     }

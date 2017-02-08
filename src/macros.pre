@@ -69,8 +69,10 @@ macro {
     }
 } >> {
     function __get(···parameters) {
-        $this->handleGetClassAccessors(···parameters);
-        
+        if ($result = $this->handleGetClassAccessors(···parameters)) {
+            return $result;
+        }
+
         ···body
     }
 }
@@ -82,7 +84,9 @@ macro {
     }
 } >> {
     function __set(···parameters) {
-        $this->handleSetClassAccessors(···parameters);
+        if ($result = $this->handleSetClassAccessors(···parameters)) {
+            return $result;
+        }
 
         ···body
     }
@@ -95,7 +99,9 @@ macro {
     }
 } >> {
     function __unset(···parameters) {
-        $this->handleUnsetClassAccessors(···parameters);
+        if ($result = $this->handleUnsetClassAccessors(···parameters)) {
+            return $result;
+        }
 
         ···body
     }
