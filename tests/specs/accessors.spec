@@ -27,6 +27,16 @@ class Fixture
             $this->person_age = round($value);
         }
     };
+
+    private bool $shouldDoThing {
+        get {
+            return $this->shouldDoThing;
+        }
+
+        set {
+            $this->shouldDoThing = $value;
+        }
+    }
 }
 
 --EXPECT--
@@ -59,5 +69,17 @@ class Fixture
     public function setPersonAge($value)
     {
         $this->person_age = round($value);
+    }
+
+    private $shouldDoThing;
+
+    public function getShouldDoThing(): bool
+    {
+        return $this->shouldDoThing;
+    }
+
+    public function setShouldDoThing(bool $value)
+    {
+        $this->shouldDoThing = $value;
     }
 }

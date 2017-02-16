@@ -7,7 +7,8 @@
     },
     "autoload": {
         "files": [
-            "src/bootstrap.php"
+            "src/bootstrap.php",
+            "src/expanders.php"
         ],
         "psr-4": {
             "Pre\\ClassAccessors\\": "src"

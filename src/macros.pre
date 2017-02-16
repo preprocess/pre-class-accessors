@@ -13,7 +13,7 @@ macro {
 }
 
 macro ·unsafe {
-    private T_VARIABLE·name {
+    private ·optional(·ns())·type T_VARIABLE·name {
         ·repeat(
             ·either(
                 ·chain(
@@ -44,12 +44,12 @@ macro ·unsafe {
     ··trim(
         ·accessors ··· {
             ·getter ?··· {
-                public function ··concat(get ··studly(··unvar(T_VARIABLE·name)))() {
+                public function ··concat(get ··studly(··unvar(T_VARIABLE·name)))()··class_accessors_return(·type) {
                     ·getter_body
                 }
             }
             ·setter ?··· {
-                public function ··concat(set ··studly(··unvar(T_VARIABLE·name)))($value) {
+                public function ··concat(set ··studly(··unvar(T_VARIABLE·name)))(·type $value) {
                     ·setter_body
                 }
             }
