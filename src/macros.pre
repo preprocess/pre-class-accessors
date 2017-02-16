@@ -13,7 +13,7 @@ macro {
 }
 
 macro ·unsafe {
-    private ·optional(·ns())·type T_VARIABLE·name {
+    private ·optional(·either(·ns(), T_ARRAY·a))·type T_VARIABLE·name {
         ·repeat(
             ·either(
                 ·chain(
@@ -41,25 +41,23 @@ macro ·unsafe {
 } >> {
     private T_VARIABLE·name;
 
-    ··trim(
-        ·accessors ··· {
-            ·getter ?··· {
-                public function ··concat(get ··studly(··unvar(T_VARIABLE·name)))()··class_accessors_return(·type) {
-                    ·getter_body
-                }
-            }
-            ·setter ?··· {
-                public function ··concat(set ··studly(··unvar(T_VARIABLE·name)))(·type $value) {
-                    ·setter_body
-                }
-            }
-            ·unsetter ?··· {
-                public function ··concat(unset ··studly(··unvar(T_VARIABLE·name)))() {
-                    ·unsetter_body
-                }
+    ·accessors ··· {
+        ·getter ?··· {
+            public function ··concat(get ··studly(··unvar(T_VARIABLE·name)))()··class_accessors_return(·type) {
+                ·getter_body
             }
         }
-    )
+        ·setter ?··· {
+            public function ··concat(set ··studly(··unvar(T_VARIABLE·name)))(·type $value) {
+                ·setter_body
+            }
+        }
+        ·unsetter ?··· {
+            public function ··concat(unset ··studly(··unvar(T_VARIABLE·name)))() {
+                ·unsetter_body
+            }
+        }
+    }
 }
 
 macro {
