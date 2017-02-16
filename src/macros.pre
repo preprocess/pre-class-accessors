@@ -44,17 +44,17 @@ macro ·unsafe {
     ··trim(
         ·accessors ··· {
             ·getter ?··· {
-                private function ··concat(get ··studly(··unvar(T_VARIABLE·name)))() {
+                public function ··concat(get ··studly(··unvar(T_VARIABLE·name)))() {
                     ·getter_body
                 }
             }
             ·setter ?··· {
-                private function ··concat(set ··studly(··unvar(T_VARIABLE·name)))($value) {
+                public function ··concat(set ··studly(··unvar(T_VARIABLE·name)))($value) {
                     ·setter_body
                 }
             }
             ·unsetter ?··· {
-                private function ··concat(unset ··studly(··unvar(T_VARIABLE·name)))() {
+                public function ··concat(unset ··studly(··unvar(T_VARIABLE·name)))() {
                     ·unsetter_body
                 }
             }

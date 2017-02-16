@@ -58,7 +58,7 @@ class Fixture
 
     private $name;
 
-    private function getName()
+    public function getName()
     {
         return $this->name;
     }
@@ -74,7 +74,7 @@ class Fixture
 
     private $age;
 
-    private function setAge($value)
+    public function setAge($value)
     {
         $this->age = $value;
     }
@@ -90,7 +90,7 @@ class Fixture
 
     private $feature;
 
-    private function unsetFeature()
+    public function unsetFeature()
     {
         $this->feature = null;
     }

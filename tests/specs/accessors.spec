@@ -39,24 +39,24 @@ class Fixture
 
     private $name;
 
-    private function getName()
+    public function getName()
     {
         return $this->name;
     }
 
-    private function setName($value)
+    public function setName($value)
     {
         $this->name = ucwords($value);
     }
 
-    private function unsetName()
+    public function unsetName()
     {
         $this->name = "unset";
     }
 
     private $person_age;
 
-    private function setPersonAge($value)
+    public function setPersonAge($value)
     {
         $this->person_age = round($value);
     }
