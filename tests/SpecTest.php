@@ -2,7 +2,7 @@
 
 namespace Pre\ClassAccessors;
 
-use Pre\Testing\Runner;
+use Pre\Plugin\Testing\Runner;
 
 class SpecTest extends Runner
 {

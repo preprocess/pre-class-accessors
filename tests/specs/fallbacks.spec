@@ -1,6 +1,6 @@
 --DESCRIPTION--
 
-Test accessor fallbacks
+Test class accessors fallback macros
 
 --GIVEN--
 

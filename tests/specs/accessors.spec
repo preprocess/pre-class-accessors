@@ -1,6 +1,6 @@
 --DESCRIPTION--
 
-Test accessors
+Test class accessors macros
 
 --GIVEN--
 
