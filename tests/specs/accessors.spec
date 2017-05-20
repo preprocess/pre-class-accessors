@@ -37,6 +37,41 @@ class Fixture
             $this->shouldDoThing = $value;
         }
     }
+
+    private string $typed {
+        get {
+            return $this->typed;
+        }
+
+        set {
+            $this->typed = $value;
+        }
+    }
+
+    protected $protected {
+        get {
+            return $this->protected;
+        }
+    }
+
+    private $simple {
+        get; set; unset;
+    }
+
+    private $immutable {
+        immutable set {
+            $this->immutable = $value;
+        }
+
+        immutable unset {
+            unset($this->immutable);
+        }
+    }
+
+    private $immutableSimple {
+        immutable set;
+        immutable unset;
+    }
 }
 
 --EXPECT--
@@ -81,5 +116,87 @@ class Fixture
     public function setShouldDoThing(bool $value)
     {
         $this->shouldDoThing = $value;
+    }
+
+    private $typed;
+
+    public function getTyped(): string
+    {
+        return $this->typed;
+    }
+
+    public function setTyped(string $value)
+    {
+        $this->typed = $value;
+    }
+
+    protected $protected;
+
+    public function getProtected()
+    {
+        return $this->protected;
+    }
+
+    private $simple;
+
+    public function getSimple()
+    {
+        return $this->simple;
+    }
+
+    public function setSimple($value)
+    {
+        $this->simple = $value;
+        return $this;
+    }
+
+    public function unsetSimple()
+    {
+        unset($this->simple);
+        return $this;
+    }
+
+    private $immutable;
+
+    public function withImmutable($value)
+    {
+        $clone = clone $this;
+
+        $bound = \Closure::bind(function () use ($value) {
+            $this->immutable = $value;
+        }, $clone);
+
+        $bound();
+
+        return $clone;
+    }
+
+    public function withoutImmutable($value)
+    {
+        $clone = clone $this;
+
+        $bound = \Closure::bind(function () use ($value) {
+            unset($this->immutable);
+        }, $clone);
+
+        $bound();
+
+        return $clone;
+    }
+
+    private $immutableSimple;
+
+    public function withImmutableSimple($value)
+    {
+        $clone = clone($this);
+        $clone->immutableSimple = $value;
+        return $clone;
+    }
+
+    public function withoutImmutableSimple($value)
+    {
+        $clone = clone($this);
+        unset($clone->immutableSimple);
+        return $clone;
     }
 }
