@@ -85,85 +85,85 @@ macro ·unsafe {
 
     ·accessors ··· {
         ·simpleGetter ?· {··trim(
-            public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {··trim(
+            public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {
                 return $this->··unvar(·name);
-            )}
+            }
         )}
 
         ·getter ?· {··trim(
-            public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {··trim(
-                ·getterBody
-            )}
+            public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {
+                ··trim(·getterBody)
+            }
         )}
 
         ·simpleSetter ?· {··trim(
-            public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+            public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {
                 $this->··unvar(·name) = $value;
                 return $this;
-            )}
+            }
         )}
 
         ·setter ?· {··trim(
-            public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
-                ·setterBody
-            )}
+            public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {
+                ··trim(·setterBody)
+            }
         )}
 
         ·immutableSimpleSetter ?· {··trim(
-            public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+            public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {
                 $clone = clone($this);
                 $clone->··unvar(·name) = $value;
                 return $clone;
-            )}
+            }
         )}
 
         ·immutableSetter ?· {··trim(
-            public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+            public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {
                 $clone = clone $this;
 
                 $bound = \Closure::bind(function() use ($value) {
-                    ·immutableSetterBody
+                    ··trim(·immutableSetterBody)
                 }, $clone);
 
                 $bound();
 
                 return $clone;
-            )}
+            }
         )}
 
         ·simpleUnsetter ?· {··trim(
-            public function ··concat(unset ··studly(··unvar(·name)))() {··trim(
+            public function ··concat(unset ··studly(··unvar(·name)))() {
                 unset($this->··unvar(·name));
                 return $this;
-            )}
+            }
         )}
 
         ·unsetter ?· {··trim(
-            public function ··concat(unset ··studly(··unvar(·name)))() {··trim(
-                ·unsetterBody
-            )}
+            public function ··concat(unset ··studly(··unvar(·name)))() {
+                ··trim(·unsetterBody)
+            }
         )}
 
         ·immutableSimpleUnsetter ?· {··trim(
-            public function ··concat(without ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+            public function ··concat(without ··studly(··unvar(·name)))(··trim(·type $value)) {
                 $clone = clone($this);
                 unset($clone->··unvar(·name));
                 return $clone;
-            )}
+            }
         )}
 
         ·immutableUnsetter ?· {··trim(
-            public function ··concat(without ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+            public function ··concat(without ··studly(··unvar(·name)))(··trim(·type $value)) {
                 $clone = clone $this;
 
                 $bound = \Closure::bind(function() use ($value) {
-                    ·immutableUnsetterBody
+                    ··trim(·immutableUnsetterBody)
                 }, $clone);
 
                 $bound();
 
                 return $clone;
-            )}
+            }
         )}
     }
 }
