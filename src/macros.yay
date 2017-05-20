@@ -217,12 +217,27 @@ macro {
     ·chain(
         class,
         ·ns()·name,
+        ·optional (
+            ·chain(
+                extends,
+                ·ns()·extendsName
+            )
+        )·extends,
+        ·optional (
+            ·chain(
+                implements,
+                ·lst(
+                    ·ns()·implementsName,
+                    ·token(",")
+                )·implementsItems
+            )
+        )·implements,
         ·token("{"),
         ·layer()·body,
         ·token("}")
     )
 } >> {
-    class ·name {
+    class ·name ·extends ?·{ extends ·extendsName } ·implements ?·{ implements ·implementsItems ···( , ){ ·implementsName } } {
         use \Pre\ClassAccessors\ClassAccessorsTrait;
 
         ·body
