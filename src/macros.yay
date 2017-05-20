@@ -1,62 +1,170 @@
 <?php
 
-macro {
-    class ·ns()·class {
-        ···body
-    }
-} >> {
-    class ·class {
-        use \Pre\ClassAccessors\ClassAccessorsTrait;
-
-        ···body
-    }
-}
-
 macro ·unsafe {
-    private ·optional(·either(·ns(), T_ARRAY·a))·type T_VARIABLE·name {
+    ·chain (
+        ·either(
+            private,
+            protected
+        )·visibility,
+        ·optional(
+            ·either(
+                ·ns(),
+                ·token(T_ARRAY)
+            )
+        )·type,
+        ·token(T_VARIABLE)·name,
+        ·token("{"),
         ·repeat(
             ·either(
                 ·chain(
                     get,
-                    ·between(
-                        ·token("{"), ·layer(), ·token("}")
-                    )·getter_body
+                    ·token(";")
+                )·simpleGetter,
+                ·chain(
+                    get,
+                    ·token("{"),
+                    ·layer()·getterBody,
+                    ·token("}"),
+                    ·optional(·token(";"))
                 )·getter,
                 ·chain(
                     set,
-                    ·between(
-                        ·token("{"), ·layer(), ·token("}")
-                    )·setter_body
+                    ·token(";")
+                )·simpleSetter,
+                ·chain(
+                    set,
+                    ·token("{"),
+                    ·layer()·setterBody,
+                    ·token("}"),
+                    ·optional(·token(";"))
                 )·setter,
                 ·chain(
+                    immutable,
+                    set,
+                    ·token(";")
+                )·immutableSimpleSetter,
+                ·chain(
+                    immutable,
+                    set,
+                    ·token("{"),
+                    ·layer()·immutableSetterBody,
+                    ·token("}"),
+                    ·optional(·token(";"))
+                )·immutableSetter,
+                ·chain(
                     unset,
-                    ·between(
-                        ·token("{"), ·layer(), ·token("}")
-                    )·unsetter_body
-                )·unsetter
+                    ·token(";")
+                )·simpleUnsetter,
+                ·chain(
+                    unset,
+                    ·token("{"),
+                    ·layer()·unsetterBody,
+                    ·token("}"),
+                    ·optional(·token(";"))
+                )·unsetter,
+                ·chain(
+                    immutable,
+                    unset,
+                    ·token(";")
+                )·immutableSimpleUnsetter,
+                ·chain(
+                    immutable,
+                    unset,
+                    ·token("{"),
+                    ·layer()·immutableUnsetterBody,
+                    ·token("}"),
+                    ·optional(·token(";"))
+                )·immutableUnsetter
             )
-        )·accessors
-    }
-    ·optional(·token(";"))
+        )·accessors,
+        ·token("}"),
+        ·optional(·token(";"))
+    )
 } >> {
-    private T_VARIABLE·name;
+    ·visibility ·name;
 
     ·accessors ··· {
-        ·getter ?··· {
-            public function ··concat(get ··studly(··unvar(T_VARIABLE·name)))()··class_accessors_return(·type) {
-                ·getter_body
-            }
-        }
-        ·setter ?··· {
-            public function ··concat(set ··studly(··unvar(T_VARIABLE·name)))(·type $value) {
-                ·setter_body
-            }
-        }
-        ·unsetter ?··· {
-            public function ··concat(unset ··studly(··unvar(T_VARIABLE·name)))() {
-                ·unsetter_body
-            }
-        }
+        ·simpleGetter ?· {··trim(
+            public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {··trim(
+                return $this->··unvar(·name);
+            )}
+        )}
+
+        ·getter ?· {··trim(
+            public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {··trim(
+                ·getterBody
+            )}
+        )}
+
+        ·simpleSetter ?· {··trim(
+            public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+                $this->··unvar(·name) = $value;
+                return $this;
+            )}
+        )}
+
+        ·setter ?· {··trim(
+            public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+                ·setterBody
+            )}
+        )}
+
+        ·immutableSimpleSetter ?· {··trim(
+            public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+                $clone = clone($this);
+                $clone->··unvar(·name) = $value;
+                return $clone;
+            )}
+        )}
+
+        ·immutableSetter ?· {··trim(
+            public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+                $clone = clone $this;
+
+                $bound = \Closure::bind(function() use ($value) {
+                    ·immutableSetterBody
+                }, $clone);
+
+                $bound();
+
+                return $clone;
+            )}
+        )}
+
+        ·simpleUnsetter ?· {··trim(
+            public function ··concat(unset ··studly(··unvar(·name)))() {··trim(
+                unset($this->··unvar(·name));
+                return $this;
+            )}
+        )}
+
+        ·unsetter ?· {··trim(
+            public function ··concat(unset ··studly(··unvar(·name)))() {··trim(
+                ·unsetterBody
+            )}
+        )}
+
+        ·immutableSimpleUnsetter ?· {··trim(
+            public function ··concat(without ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+                $clone = clone($this);
+                unset($clone->··unvar(·name));
+                return $clone;
+            )}
+        )}
+
+        ·immutableUnsetter ?· {··trim(
+            public function ··concat(without ··studly(··unvar(·name)))(··trim(·type $value)) {··trim(
+                $clone = clone $this;
+
+                $bound = \Closure::bind(function() use ($value) {
+                    ·immutableUnsetterBody
+                }, $clone);
+
+                $bound();
+
+                return $clone;
+            )}
+        )}
     }
 }
 
@@ -71,7 +179,7 @@ macro {
             return $result;
         }
 
-        ···body
+        ··trim(···body)
     }
 }
 
@@ -86,7 +194,7 @@ macro {
             return $result;
         }
 
-        ···body
+        ··trim(···body)
     }
 }
 
@@ -101,6 +209,22 @@ macro {
             return $result;
         }
 
-        ···body
+        ··trim(···body)
+    }
+}
+
+macro {
+    ·chain(
+        class,
+        ·ns()·name,
+        ·token("{"),
+        ·layer()·body,
+        ·token("}")
+    )
+} >> {
+    class ·name {
+        use \Pre\ClassAccessors\ClassAccessorsTrait;
+
+        ·body
     }
 }
