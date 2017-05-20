@@ -183,11 +183,11 @@ class Fixture
         return $clone;
     }
 
-    public function withoutImmutable($value)
+    public function withoutImmutable()
     {
         $clone = clone $this;
 
-        $bound = \Closure::bind(function () use ($value) {
+        $bound = \Closure::bind(function () {
             unset($this->immutable);
         }, $clone);
 
@@ -205,7 +205,7 @@ class Fixture
         return $clone;
     }
 
-    public function withoutImmutableSimple($value)
+    public function withoutImmutableSimple()
     {
         $clone = clone($this);
         unset($clone->immutableSimple);

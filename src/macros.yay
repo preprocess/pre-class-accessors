@@ -145,7 +145,7 @@ macro ·unsafe {
         )}
 
         ·immutableSimpleUnsetter ?· {··trim(
-            public function ··concat(without ··studly(··unvar(·name)))(··trim(·type $value)) {
+            public function ··concat(without ··studly(··unvar(·name)))() {
                 $clone = clone($this);
                 unset($clone->··unvar(·name));
                 return $clone;
@@ -153,10 +153,10 @@ macro ·unsafe {
         )}
 
         ·immutableUnsetter ?· {··trim(
-            public function ··concat(without ··studly(··unvar(·name)))(··trim(·type $value)) {
+            public function ··concat(without ··studly(··unvar(·name)))() {
                 $clone = clone $this;
 
-                $bound = \Closure::bind(function() use ($value) {
+                $bound = \Closure::bind(function () {
                     ··trim(·immutableUnsetterBody)
                 }, $clone);
 
