@@ -74,6 +74,18 @@ class Fixture
     }
 }
 
+class Child extends Parent {
+
+}
+
+class Child implements Parent {
+
+}
+
+class VeryChild extends Parent implements Parent, Parent, Parent {
+
+}
+
 --EXPECT--
 
 namespace Pre\ClassAccessors\Fixture;
@@ -199,4 +211,19 @@ class Fixture
         unset($clone->immutableSimple);
         return $clone;
     }
+}
+
+class Child extends Parent
+{
+    use \Pre\ClassAccessors\ClassAccessorsTrait;
+}
+
+class Child implements Parent
+{
+    use \Pre\ClassAccessors\ClassAccessorsTrait;
+}
+
+class VeryChild extends Parent implements Parent, Parent, Parent
+{
+    use \Pre\ClassAccessors\ClassAccessorsTrait;
 }
