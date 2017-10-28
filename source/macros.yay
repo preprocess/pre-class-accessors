@@ -81,94 +81,96 @@ macro ·unsafe {
         ·optional(·token(";"))
     )
 } >> {
-    ·visibility ·name;
+    ··collapse(··trim(
+        ·visibility ·name;
 
-    ·accessors ··· {
-        ·simpleGetter ?· {··trim(
-            public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {
-                return $this->··unvar(·name);
-            }
-        )}
+        ·accessors ··· {
+            ·simpleGetter ?· {··trim(
+                public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {
+                    return $this->··unvar(·name);
+                }
+            )}
 
-        ·getter ?· {··trim(
-            public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {
-                ··trim(·getterBody)
-            }
-        )}
+            ·getter ?· {··trim(
+                public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {
+                    ··trim(·getterBody)
+                }
+            )}
 
-        ·simpleSetter ?· {··trim(
-            public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {
-                $this->··unvar(·name) = $value;
-                return $this;
-            }
-        )}
+            ·simpleSetter ?· {··trim(
+                public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {
+                    $this->··unvar(·name) = $value;
+                    return $this;
+                }
+            )}
 
-        ·setter ?· {··trim(
-            public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {
-                ··trim(·setterBody)
-            }
-        )}
+            ·setter ?· {··trim(
+                public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {
+                    ··trim(·setterBody)
+                }
+            )}
 
-        ·immutableSimpleSetter ?· {··trim(
-            public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {
-                $clone = clone($this);
-                $clone->··unvar(·name) = $value;
-                return $clone;
-            }
-        )}
+            ·immutableSimpleSetter ?· {··trim(
+                public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {
+                    $clone = clone($this);
+                    $clone->··unvar(·name) = $value;
+                    return $clone;
+                }
+            )}
 
-        ·immutableSetter ?· {··trim(
-            public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {
-                $clone = clone $this;
+            ·immutableSetter ?· {··trim(
+                public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {
+                    $clone = clone $this;
 
-                $bound = \Closure::bind(function() use ($value) {
-                    ··trim(·immutableSetterBody)
-                }, $clone);
+                    $bound = \Closure::bind(function() use ($value) {
+                        ··trim(·immutableSetterBody)
+                    }, $clone);
 
-                $bound();
+                    $bound();
 
-                return $clone;
-            }
-        )}
+                    return $clone;
+                }
+            )}
 
-        ·simpleUnsetter ?· {··trim(
-            public function ··concat(unset ··studly(··unvar(·name)))() {
-                unset($this->··unvar(·name));
-                return $this;
-            }
-        )}
+            ·simpleUnsetter ?· {··trim(
+                public function ··concat(unset ··studly(··unvar(·name)))() {
+                    unset($this->··unvar(·name));
+                    return $this;
+                }
+            )}
 
-        ·unsetter ?· {··trim(
-            public function ··concat(unset ··studly(··unvar(·name)))() {
-                ··trim(·unsetterBody)
-            }
-        )}
+            ·unsetter ?· {··trim(
+                public function ··concat(unset ··studly(··unvar(·name)))() {
+                    ··trim(·unsetterBody)
+                }
+            )}
 
-        ·immutableSimpleUnsetter ?· {··trim(
-            public function ··concat(without ··studly(··unvar(·name)))() {
-                $clone = clone($this);
-                unset($clone->··unvar(·name));
-                return $clone;
-            }
-        )}
+            ·immutableSimpleUnsetter ?· {··trim(
+                public function ··concat(without ··studly(··unvar(·name)))() {
+                    $clone = clone($this);
+                    unset($clone->··unvar(·name));
+                    return $clone;
+                }
+            )}
 
-        ·immutableUnsetter ?· {··trim(
-            public function ··concat(without ··studly(··unvar(·name)))() {
-                $clone = clone $this;
+            ·immutableUnsetter ?· {··trim(
+                public function ··concat(without ··studly(··unvar(·name)))() {
+                    $clone = clone $this;
 
-                $bound = \Closure::bind(function () {
-                    ··trim(·immutableUnsetterBody)
-                }, $clone);
+                    $bound = \Closure::bind(function () {
+                        ··trim(·immutableUnsetterBody)
+                    }, $clone);
 
-                $bound();
+                    $bound();
 
-                return $clone;
-            }
-        )}
-    }
+                    return $clone;
+                }
+            )}
+        }
+    ))
 }
 
-macro {
+macro ·unsafe {
     function __get(···parameters) {
         accessors;
         ···body
@@ -183,7 +185,7 @@ macro {
     }
 }
 
-macro {
+macro ·unsafe {
     function __set(···parameters) {
         accessors;
         ···body
@@ -198,7 +200,7 @@ macro {
     }
 }
 
-macro {
+macro ·unsafe {
     function __unset(···parameters) {
         accessors;
         ···body
