@@ -1,11 +1,3 @@
---DESCRIPTION--
-
-Test class accessors macros
-
---GIVEN--
-
-namespace Pre\ClassAccessors\Fixture;
-
 class Fixture
 {
     private $name {
@@ -86,9 +78,7 @@ class VeryChild extends Parent implements Parent, Parent, Parent {
 
 }
 
---EXPECT--
-
-namespace Pre\ClassAccessors\Fixture;
+~~~
 
 class Fixture
 {

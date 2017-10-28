@@ -1,11 +1,3 @@
---DESCRIPTION--
-
-Test class accessors fallback macros
-
---GIVEN--
-
-namespace Pre\ClassAccessors\Fixture;
-
 class Fixture
 {
     private $name {
@@ -48,9 +40,7 @@ class Fixture
     }
 }
 
---EXPECT--
-
-namespace Pre\ClassAccessors\Fixture;
+~~~
 
 class Fixture
 {
@@ -65,8 +55,8 @@ class Fixture
 
     public function __get($property)
     {
-        if ($result·2 = $this->handleGetClassAccessors($property)) {
-            return $result·2;
+        if ($result = $this->handleGetClassAccessors($property)) {
+            return $result;
         }
 
         print "getting {$property}";
@@ -81,8 +71,8 @@ class Fixture
 
     public function __set($property, $value)
     {
-        if ($result·4 = $this->handleSetClassAccessors($property, $value)) {
-            return $result·4;
+        if ($result = $this->handleSetClassAccessors($property, $value)) {
+            return $result;
         }
 
         print "setting {$property}";
@@ -97,8 +87,8 @@ class Fixture
 
     public function __unset($property)
     {
-        if ($result·6 = $this->handleUnsetClassAccessors($property)) {
-            return $result·6;
+        if ($result = $this->handleUnsetClassAccessors($property)) {
+            return $result;
         }
 
         print "unsetting {$property}";
