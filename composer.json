@@ -3,10 +3,12 @@
     "name": "pre/class-accessors",
     "license": "MIT",
     "require": {
-        "pre/plugin": "^0.10.0"
+        "pre/plugin": "*"
     },
     "autoload": {
-        "files": ["source/expanders.php"],
+        "files": [
+            "source/expanders.php"
+        ],
         "psr-4": {
             "Pre\\ClassAccessors\\": "source"
         }
@@ -15,6 +17,19 @@
         "phpunit/phpunit": "^5.0|^6.0"
     },
     "extra": {
-        "macros": ["source/macros.yay"]
-    }
+        "macros": [
+            "source/macros.yay"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../pre-plugin",
+            "options": {
+                "symlink": false
+            }
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
