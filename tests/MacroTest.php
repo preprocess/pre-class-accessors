@@ -13,7 +13,7 @@ class MacroTest extends TestCase
         Pre\Plugin\addMacro(__DIR__ . "/../source/macros.yay");
 
         $actual = Pre\plugin\format(Pre\Plugin\parse($this->format($from)));
-        $this->assertEquals($this->format($expected), $actual, $actual);
+        $this->assertEquals($this->format($expected), $actual);
     }
 
     private function format($code)

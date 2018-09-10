@@ -1,247 +1,247 @@
 <?php
 
-macro ·unsafe {
-    ·chain (
-        ·either(
+$(macro :unsafe) {
+    $(chain (
+        either(
             private,
             protected
-        )·visibility,
-        ·optional(
-            ·either(
-                ·ns(),
-                ·token(T_ARRAY)
+        ) as visibility,
+        optional(
+            either(
+                ns(),
+                token(T_ARRAY)
             )
-        )·type,
-        ·token(T_VARIABLE)·name,
-        ·token("{"),
-        ·repeat(
-            ·either(
-                ·chain(
+        ) as type,
+        token(T_VARIABLE) as name,
+        token("{"),
+        repeat(
+            either(
+                chain(
                     get,
-                    ·token(";")
-                )·simpleGetter,
-                ·chain(
+                    token(";")
+                ) as simpleGetter,
+                chain(
                     get,
-                    ·token("{"),
-                    ·layer()·getterBody,
-                    ·token("}"),
-                    ·optional(·token(";"))
-                )·getter,
-                ·chain(
+                    token("{"),
+                    layer() as getterBody,
+                    token("}"),
+                    optional(token(";"))
+                ) as getter,
+                chain(
                     set,
-                    ·token(";")
-                )·simpleSetter,
-                ·chain(
+                    token(";")
+                ) as simpleSetter,
+                chain(
                     set,
-                    ·token("{"),
-                    ·layer()·setterBody,
-                    ·token("}"),
-                    ·optional(·token(";"))
-                )·setter,
-                ·chain(
+                    token("{"),
+                    layer() as setterBody,
+                    token("}"),
+                    optional(token(";"))
+                ) as setter,
+                chain(
                     immutable,
                     set,
-                    ·token(";")
-                )·immutableSimpleSetter,
-                ·chain(
+                    token(";")
+                ) as immutableSimpleSetter,
+                chain(
                     immutable,
                     set,
-                    ·token("{"),
-                    ·layer()·immutableSetterBody,
-                    ·token("}"),
-                    ·optional(·token(";"))
-                )·immutableSetter,
-                ·chain(
+                    token("{"),
+                    layer() as immutableSetterBody,
+                    token("}"),
+                    optional(token(";"))
+                ) as immutableSetter,
+                chain(
                     unset,
-                    ·token(";")
-                )·simpleUnsetter,
-                ·chain(
+                    token(";")
+                ) as simpleUnsetter,
+                chain(
                     unset,
-                    ·token("{"),
-                    ·layer()·unsetterBody,
-                    ·token("}"),
-                    ·optional(·token(";"))
-                )·unsetter,
-                ·chain(
+                    token("{"),
+                    layer() as unsetterBody,
+                    token("}"),
+                    optional(token(";"))
+                ) as unsetter,
+                chain(
                     immutable,
                     unset,
-                    ·token(";")
-                )·immutableSimpleUnsetter,
-                ·chain(
+                    token(";")
+                ) as immutableSimpleUnsetter,
+                chain(
                     immutable,
                     unset,
-                    ·token("{"),
-                    ·layer()·immutableUnsetterBody,
-                    ·token("}"),
-                    ·optional(·token(";"))
-                )·immutableUnsetter
+                    token("{"),
+                    layer() as immutableUnsetterBody,
+                    token("}"),
+                    optional(token(";"))
+                ) as immutableUnsetter
             )
-        )·accessors,
-        ·token("}"),
-        ·optional(·token(";"))
-    )
+        ) as accessors,
+        token("}"),
+        optional(token(";"))
+    ))
 } >> {
-    ··collapse(··trim(
-        ·visibility ·name;
+    $$(collapse($$(trim(
+        $(visibility) $(name);
 
-        ·accessors ··· {
-            ·simpleGetter ?· {··trim(
-                public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {
-                    return $this->··unvar(·name);
+        $(accessors ... {
+            $(simpleGetter ? {$$(trim(
+                public function $$(concat(get $$(studly($$(unvar($(name)))))))()$$(\Pre\ClassAccessors\classAccessorsReturn($(type))) {
+                    return $this->$$(unvar($(name)));
                 }
-            )}
+            ))})
 
-            ·getter ?· {··trim(
-                public function ··concat(get ··studly(··unvar(·name)))()··class_accessors_return(·type) {
-                    ··trim(·getterBody)
+            $(getter ? {$$(trim(
+                public function $$(concat(get $$(studly($$(unvar($(name)))))))()$$(\Pre\ClassAccessors\classAccessorsReturn($(type))) {
+                    $(getter ... {$$(trim($(getterBody)))})
                 }
-            )}
+            ))})
 
-            ·simpleSetter ?· {··trim(
-                public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {
-                    $this->··unvar(·name) = $value;
+            $(simpleSetter ? {$$(trim(
+                public function $$(concat(set $$(studly($$(unvar($(name)))))))($$(trim($(type) $value))) {
+                    $this->$$(unvar($(name))) = $value;
                     return $this;
                 }
-            )}
+            ))})
 
-            ·setter ?· {··trim(
-                public function ··concat(set ··studly(··unvar(·name)))(··trim(·type $value)) {
-                    ··trim(·setterBody)
+            $(setter ? {$$(trim(
+                public function $$(concat(set $$(studly($$(unvar($(name)))))))($$(trim($(type) $value))) {
+                    $(setter ... {$$(trim($(setterBody)))})
                 }
-            )}
+            ))})
 
-            ·immutableSimpleSetter ?· {··trim(
-                public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {
+            $(immutableSimpleSetter ? {$$(trim(
+                public function $$(concat(with $$(studly($$(unvar($(name)))))))($$(trim($(type) $value))) {
                     $clone = clone($this);
-                    $clone->··unvar(·name) = $value;
+                    $clone->$$(unvar($(name))) = $value;
                     return $clone;
                 }
-            )}
+            ))})
 
-            ·immutableSetter ?· {··trim(
-                public function ··concat(with ··studly(··unvar(·name)))(··trim(·type $value)) {
+            $(immutableSetter ? {$$(trim(
+                public function $$(concat(with $$(studly($$(unvar($(name)))))))($$(trim($(type) $value))) {
                     $clone = clone $this;
 
                     $bound = \Closure::bind(function() use ($value) {
-                        ··trim(·immutableSetterBody)
+                        $(immutableSetter ... {$$(trim($(immutableSetterBody)))})
                     }, $clone);
 
                     $bound();
 
                     return $clone;
                 }
-            )}
+            ))})
 
-            ·simpleUnsetter ?· {··trim(
-                public function ··concat(unset ··studly(··unvar(·name)))() {
-                    unset($this->··unvar(·name));
+            $(simpleUnsetter ? {$$(trim(
+                public function $$(concat(unset $$(studly($$(unvar($(name)))))))() {
+                    unset($this->$$(unvar($(name))));
                     return $this;
                 }
-            )}
+            ))})
 
-            ·unsetter ?· {··trim(
-                public function ··concat(unset ··studly(··unvar(·name)))() {
-                    ··trim(·unsetterBody)
+            $(unsetter ? {$$(trim(
+                public function $$(concat(unset $$(studly($$(unvar($(name)))))))() {
+                    $(unsetter ... {$$(trim($(unsetterBody)))})
                 }
-            )}
+            ))})
 
-            ·immutableSimpleUnsetter ?· {··trim(
-                public function ··concat(without ··studly(··unvar(·name)))() {
+            $(immutableSimpleUnsetter ? {$$(trim(
+                public function $$(concat(without $$(studly($$(unvar($(name)))))))() {
                     $clone = clone($this);
-                    unset($clone->··unvar(·name));
+                    unset($clone->$$(unvar($(name))));
                     return $clone;
                 }
-            )}
+            ))})
 
-            ·immutableUnsetter ?· {··trim(
-                public function ··concat(without ··studly(··unvar(·name)))() {
+            $(immutableUnsetter ? {$$(trim(
+                public function $$(concat(without $$(studly($$(unvar($(name)))))))() {
                     $clone = clone $this;
 
                     $bound = \Closure::bind(function () {
-                        ··trim(·immutableUnsetterBody)
+                        $(immutableUnsetter ... {$$(trim($(immutableUnsetterBody)))})
                     }, $clone);
 
                     $bound();
 
                     return $clone;
                 }
-            )}
-        }
-    ))
+            ))})
+        })
+    ))))
 }
 
-macro ·unsafe {
-    function __get(···parameters) {
+$(macro :unsafe) {
+    function __get($(layer() as parameters)) {
         accessors;
-        ···body
+        $(layer() as body)
     }
 } >> {
-    function __get(···parameters) {
-        if ($result = $this->handleGetClassAccessors(···parameters)) {
+    function __get($(parameters)) {
+        if ($result = $this->handleGetClassAccessors($(parameters))) {
             return $result;
         }
 
-        ··trim(···body)
+        $$(trim($(body)))
     }
 }
 
-macro ·unsafe {
-    function __set(···parameters) {
+$(macro :unsafe) {
+    function __set($(layer() as parameters)) {
         accessors;
-        ···body
+        $(layer() as body)
     }
 } >> {
-    function __set(···parameters) {
-        if ($result = $this->handleSetClassAccessors(···parameters)) {
+    function __set($(parameters)) {
+        if ($result = $this->handleSetClassAccessors($(parameters))) {
             return $result;
         }
 
-        ··trim(···body)
+        $$(trim($(body)))
     }
 }
 
-macro ·unsafe {
-    function __unset(···parameters) {
+$(macro :unsafe) {
+    function __unset($(layer() as parameters)) {
         accessors;
-        ···body
+        $(layer() as body)
     }
 } >> {
-    function __unset(···parameters) {
-        if ($result = $this->handleUnsetClassAccessors(···parameters)) {
+    function __unset($(parameters)) {
+        if ($result = $this->handleUnsetClassAccessors($(parameters))) {
             return $result;
         }
 
-        ··trim(···body)
+        $$(trim($(body)))
     }
 }
 
-macro {
-    ·chain(
+$(macro) {
+    $(chain(
         class,
-        ·ns()·name,
-        ·optional (
-            ·chain(
+        ns() as name,
+        optional (
+            chain(
                 extends,
-                ·ns()·extendsName
-            )
-        )·extends,
-        ·optional (
-            ·chain(
+                ns() as extendsName
+            ) as extendsItem
+        ),
+        optional (
+            chain(
                 implements,
-                ·lst(
-                    ·ns()·implementsName,
-                    ·token(",")
-                )·implementsItems
+                lst(
+                    ns() as implementsName,
+                    token(",")
+                ) as implementsItems
             )
-        )·implements,
-        ·token("{"),
-        ·layer()·body,
-        ·token("}")
-    )
+        ) as implements,
+        token("{"),
+        layer() as body,
+        token("}")
+    ))
 } >> {
-    class ·name ·extends ?·{ extends ·extendsName } ·implements ?·{ implements ·implementsItems ···( , ){ ·implementsName } } {
+    class $(name) $(extendsItem ? {extends $(extendsItem ... {$(extendsName)})}) $(implements ? {implements $(implements ... {$(implementsItems ... ( , ){$(implementsName)})})}) {
         use \Pre\ClassAccessors\ClassAccessorsTrait;
 
-        ·body
+        $(body)
     }
 }
