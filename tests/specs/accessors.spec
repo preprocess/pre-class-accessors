@@ -190,14 +190,14 @@ class Fixture
 
     public function withImmutableSimple($value)
     {
-        $clone = clone($this);
+        $clone = clone $this;
         $clone->immutableSimple = $value;
         return $clone;
     }
 
     public function withoutImmutableSimple()
     {
-        $clone = clone($this);
+        $clone = clone $this;
         unset($clone->immutableSimple);
         return $clone;
     }
